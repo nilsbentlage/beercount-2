@@ -61,6 +61,7 @@ function SignUp() {
         label="Username"
         type="text"
         onChange={(event) => setDisplayName(event.target.value)}
+        autoFocus={true}
       />
       <TextField
         value={password}

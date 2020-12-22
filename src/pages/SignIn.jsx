@@ -51,6 +51,7 @@ function SignIn() {
             error.code === "auth/invalid-email" ? error.message : null
           }
           autoComplete="email"
+          autoFocus={true}
         />
         <TextField
           error={error.code === "auth/wrong-password" ? true : false}

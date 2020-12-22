@@ -1,7 +1,12 @@
 const themeConfig = {
   spacing: 8,
+  typography: {
+    h2: {
+      fontFamily: "Roboto Slab",
+    },
+  },
   palette: {
-    type: 'dark',
+    type: "dark",
     primary: {
       main: "#f59300",
     },
