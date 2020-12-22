@@ -1,4 +1,5 @@
 const themeConfig = {
+  spacing: 8,
   palette: {
     // type: 'dark',
     primary: {
@@ -7,4 +8,4 @@ const themeConfig = {
   },
 };
 
-export default themeConfig
+export default themeConfig;

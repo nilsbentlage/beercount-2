@@ -1,11 +1,10 @@
 import React from "react";
 
 function Splashscreen(props) {
+  
   function AutoLogin(props) {
-    const user = props.user.uid;
-    console.log(user);
-
     async function forward() {
+      const user = props.user.uid;
       user && (window.location.href = "/home");
     }
     forward();
