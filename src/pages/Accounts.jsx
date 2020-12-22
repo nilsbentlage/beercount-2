@@ -27,7 +27,7 @@ function Accounts(props) {
         let key = userId.slice(0, 4);
         output.push({ id: key, name: name, value: value });
       }
-      setEntryArray(<DataGrid rows={output} columns={columns} />);
+      setEntryArray(<DataGrid autoPageSize={true} rows={output} columns={columns} />);
     });
   }, [db]);
 

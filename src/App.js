@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import firebase from "firebase/app";
 import "firebase/auth";
 
-import firebaseConfig from "./firebase/config";
+import firebaseConfig from "./config/firebase";
 
 import WebFont from "webfontloader";
 
@@ -21,6 +21,7 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Accounts from "./pages/Accounts";
 import Options from "./pages/Options";
+import { Typography } from "@material-ui/core";
 
 firebase.initializeApp(firebaseConfig);
 
@@ -46,7 +47,7 @@ function App() {
   return (
     <div className="App">
       <AppBar position="static">
-        <img src={process.env.PUBLIC_URL + "/foreground.png"} alt="Logo" />
+        <div id="headerFlex"><img src={process.env.PUBLIC_URL + "/foreground.png"} alt="Logo" /><Typography variant="h4" component="span">BeerCount</Typography></div>
       </AppBar>
       <BrowserRouter>
         <Switch>
