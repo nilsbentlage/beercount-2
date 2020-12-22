@@ -1,7 +1,7 @@
 const themeConfig = {
   spacing: 8,
   palette: {
-    // type: 'dark',
+    type: 'dark',
     primary: {
       main: "#f59300",
     },

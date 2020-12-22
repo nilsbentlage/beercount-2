@@ -8,6 +8,7 @@ import AddIcon from "@material-ui/icons/Add";
 import SubtractIcon from "@material-ui/icons/Remove";
 import Switch from "@material-ui/core/Switch";
 import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 
 import Dialog from "@material-ui/core/Dialog";
@@ -62,36 +63,45 @@ function Home(props) {
 
   return (
     <div id="home">
-      <Typography>You have to pay {account} beers!</Typography>
-      <Typography variant="h4">
-        I would like to <br />
-        <span>PICK</span>
-        <Switch
-          name="pay"
-          value={pay}
-          onChange={(event) => setPay(event.target.checked)}
-        />
-        <span>PAY</span>
-        <div>
-          <Fab onClick={() => setCount(count - 1)}>
-            <SubtractIcon />
-          </Fab>
-          <span id="output">{count}</span>
-          <Fab onClick={() => setCount(count + 1)}>
-            <AddIcon />
-          </Fab>
-        </div>
-        <div>Beers</div>
-      </Typography>
-
-      <Button
-        variant="contained"
-        color="primary"
-        disabled={count === 0 ? true : false}
-        onClick={() => setOpen(true)}
+      <Typography variant="h2">Pick'n'Pay</Typography>
+      <br /> <br />
+      <Card
+        style={{ display: "inline-block", maxWidth: "90%", padding: "24px" }}
+        variant="outlined"
+        raised="true"
       >
-        Checkout
-      </Button>
+        <Typography>You have to pay {account} beers!</Typography>
+        <Typography variant="h4">
+          I would like to <br />
+          <span>PICK</span>
+          <Switch
+            name="pay"
+            value={pay}
+            onChange={(event) => setPay(event.target.checked)}
+          />
+          <span>PAY</span>
+          <div>
+            <Fab onClick={() => setCount(count - 1)}>
+              <SubtractIcon />
+            </Fab>
+            <span id="output">{count}</span>
+            <Fab onClick={() => setCount(count + 1)}>
+              <AddIcon />
+            </Fab>
+          </div>
+          <div>Beers</div>
+        </Typography>
+        <br />
+        <br />
+        <Button
+          variant="contained"
+          color="primary"
+          disabled={count === 0 ? true : false}
+          onClick={() => setOpen(true)}
+        >
+          Checkout
+        </Button>
+      </Card>
       <Dialog
         open={open}
         aria-labelledby="alert-dialog-title"

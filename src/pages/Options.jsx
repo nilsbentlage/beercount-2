@@ -19,8 +19,8 @@ function Options() {
   };
   return (
     <div>
-      <Typography variant="h4">Options</Typography>
-      <Typography variant="body1">Copyright & Support<br />Nils Bentlage</Typography><br />
+            <Typography variant="h2">Options</Typography><br /> <br />
+      <Typography variant="body1">Copyright & Support<br />Nils Bentlage</Typography><br /><br />
       <Button variant="contained" color="primary" onClick={Logout}>
         Logout
       </Button>

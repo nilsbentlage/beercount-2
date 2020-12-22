@@ -32,7 +32,7 @@ function App() {
     },
   });
 
-  const [user, setUser] = React.useState({uid: 0});
+  const [user, setUser] = React.useState({ uid: 0 });
 
   React.useEffect(() => {
     firebase.auth().onAuthStateChanged((answer) => {
@@ -45,9 +45,19 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        backgroundImage: "url(" + process.env.PUBLIC_URL + "/background.jpg)",
+      }}
+    >
       <AppBar position="static">
-        <div id="headerFlex"><img src={process.env.PUBLIC_URL + "/foreground.png"} alt="Logo" /><Typography variant="h4" component="span">BeerCount</Typography></div>
+        <div id="headerFlex">
+          <img src={process.env.PUBLIC_URL + "/foreground.png"} alt="Logo" />
+          <Typography variant="h4" component="span">
+            BeerCount
+          </Typography>
+        </div>
       </AppBar>
       <BrowserRouter>
         <Switch>
