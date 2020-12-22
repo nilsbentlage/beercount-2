@@ -2,16 +2,21 @@ import React from "react";
 
 function Splashscreen(props) {
   function AutoLogin(props) {
-    setTimeout(function() {
-      props.user.uid
-        ? (window.location.href = "/home")
-        : (window.location.href = "/signin");
-    }, 2000);
+    const user = props.user.uid;
+    console.log(user);
+
+    async function forward() {
+      user && (window.location.href = "/home");
+    }
+    forward();
+    setTimeout(function () {
+      window.location.href = "/signin";
+    }, 5000);
   }
 
   React.useEffect(() => {
-    AutoLogin(props)
-  }, [])
+    AutoLogin(props);
+  }, [props]);
 
   return (
     <div
