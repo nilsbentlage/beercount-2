@@ -43,7 +43,7 @@ function Accounts(props) {
   return (
     <div id="accountList">
       <Typography variant="h2">Account Overview</Typography><br /> <br />
-      <Card style={{ height: "50vh" }} variant="outlined" raised="true">
+      <Card style={{ height: "50vh" }} variant="outlined" raised={true}>
         {entryArray}
       </Card>
     </div>

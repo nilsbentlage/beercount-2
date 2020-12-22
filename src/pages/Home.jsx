@@ -68,7 +68,7 @@ function Home(props) {
       <Card
         style={{ display: "inline-block", maxWidth: "90%", padding: "24px" }}
         variant="outlined"
-        raised="true"
+        raised={true}
       >
         <Typography>You have to pay {account} beers!</Typography>
         <Typography variant="h4">
