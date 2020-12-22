@@ -2,6 +2,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import FormGroup from "@material-ui/core/FormGroup";
+import Link from '@material-ui/core/Link'
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -49,6 +50,7 @@ function SignIn() {
           helperText={
             error.code === "auth/invalid-email" ? error.message : null
           }
+          autoComplete="email"
         />
         <TextField
           error={error.code === "auth/wrong-password" ? true : false}
@@ -59,6 +61,8 @@ function SignIn() {
           helperText={
             error.code === "auth/wrong-password" ? error.message : null
           }
+          autoComplete="current-password"
+
         />
         <Button
           variant="contained"
@@ -68,7 +72,7 @@ function SignIn() {
         >
           Login
         </Button>
-        <a href="/signup">Create a new Account</a>
+        <Link href="/signup">Create a new Account</Link>
       </FormGroup>
     </form>
   );

@@ -2,6 +2,8 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import FormGroup from "@material-ui/core/FormGroup";
+import Link from '@material-ui/core/Link'
+
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -52,6 +54,7 @@ function SignUp() {
         label="E-Mail"
         type="email"
         onChange={(event) => setEmail(event.target.value)}
+        autoComplete="email"
       />
       <TextField
         value={displayName}
@@ -64,6 +67,7 @@ function SignUp() {
         label="Password"
         type="password"
         onChange={(event) => setPassword(event.target.value)}
+        autoComplete="new-password"
       />
       <TextField
         value={repeatPassword}
@@ -71,6 +75,7 @@ function SignUp() {
         type="password"
         helperText={error}
         onChange={(event) => setRepeatPassword(event.target.value)}
+        autoComplete="new-password"
       />
       <Button
         type="submit"
@@ -80,7 +85,7 @@ function SignUp() {
       >
         SignUp
       </Button>
-      <a href="/signin">Go back to login</a>
+      <Link href="/signin">Go back to login</Link>
     </FormGroup>
   );
 }
