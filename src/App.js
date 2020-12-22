@@ -1,24 +1,95 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.sass";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import firebase from "firebase/app";
+import "firebase/auth";
+
+import firebaseConfig from "./firebase/config";
+
+import WebFont from "webfontloader";
+
+import AppBar from "@material-ui/core/AppBar";
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import ListIcon from "@material-ui/icons/List";
+import InfoIcon from "@material-ui/icons/Info";
+
+import Splashscreen from "./pages/Splashscreen";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import Home from "./pages/Home";
+import Accounts from "./pages/Accounts";
+import Options from "./pages/Options";
+
+firebase.initializeApp(firebaseConfig);
 
 function App() {
+  WebFont.load({
+    google: {
+      families: ["Roboto Slab", "Roboto"],
+    },
+  });
+
+  const [user, setUser] = React.useState({});
+
+  React.useEffect(() => {
+    firebase.auth().onAuthStateChanged((answer) => {
+      if (answer) {
+        setUser(answer);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <AppBar position="static">
+        <img src={process.env.PUBLIC_URL + "/foreground.png"} alt="Logo" />
+      </AppBar>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Splashscreen user={user} />
+          </Route>
+          <Route path="/signin" component={SignIn} />
+          <Route path="/signup" component={SignUp} />
+          <Route path="/home">
+            <Home user={user} />
+          </Route>
+          <Route path="/accounts" component={Accounts} />
+          <Route path="/options" component={Options} />
+        </Switch>
+      </BrowserRouter>
+      {user ? (
+        <BottomNavigation
+          onChange={(event, newValue) => {
+            window.location.href = newValue;
+          }}
+          showLabels
         >
-          Learn React
-        </a>
-      </header>
+          <BottomNavigationAction
+            value="home"
+            label="Pick'n'Pay"
+            icon={<AddCircleOutlineIcon />}
+          />
+          <BottomNavigationAction
+            value="accounts"
+            label="Accounts"
+            icon={<ListIcon />}
+          />
+          <BottomNavigationAction
+            value="options"
+            label="Options"
+            icon={<InfoIcon />}
+          />
+        </BottomNavigation>
+      ) : (
+        <div>
+          <br />
+        </div>
+      )}
     </div>
   );
 }
