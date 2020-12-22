@@ -1,6 +1,4 @@
 import React from "react";
-import { useRecoilState } from "recoil";
-import userState from "../atoms/userState";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -9,7 +7,6 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 function SignUp() {
-  const [user, setUser] = useRecoilState(userState);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [repeatPassword, setRepeatPassword] = React.useState("");
@@ -33,7 +30,6 @@ function SignUp() {
             firebase.auth().currentUser.updateProfile({
               displayName: displayName,
             });
-            setUser({ id: user.uid, name: displayName });
             window.location.href = "/home";
             setEmail("");
             setPassword("");

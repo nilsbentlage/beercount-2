@@ -15,21 +15,23 @@ function Accounts(props) {
         field: "value",
         type: "number",
         headerName: "Saldo",
-        width: 100,
-        flex: 0,
+        width: 80,
+        flex: 0
       },
     ];
     db.once("value").then((allUserIds) => {
       let output = [];
       for (let userId in allUserIds.val()) {
         let name = allUserIds.val()[userId].name;
-        let value = allUserIds.val()[userId].count;
+        let value = allUserIds.val()[userId].count  * -1 + " €";
         let key = userId.slice(0, 4);
         output.push({ id: key, name: name, value: value });
       }
-      setEntryArray(<DataGrid autoPageSize={true} rows={output} columns={columns} />);
+      setEntryArray(
+        <DataGrid hideFooterPagination={output.length < 10 ? true : false} autoPageSize={true} rows={output} columns={columns} />
+      );
     });
-  }, [db]);
+  }, []);
 
   return <div id="accountList">{entryArray}</div>;
 }

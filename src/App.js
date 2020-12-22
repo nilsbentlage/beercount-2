@@ -32,7 +32,7 @@ function App() {
     },
   });
 
-  const [user, setUser] = React.useState({});
+  const [user, setUser] = React.useState({uid: 0});
 
   React.useEffect(() => {
     firebase.auth().onAuthStateChanged((answer) => {

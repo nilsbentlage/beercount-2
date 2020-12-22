@@ -5,6 +5,9 @@ const themeConfig = {
     primary: {
       main: "#f59300",
     },
+    secondary: {
+      main: "#72dd34",
+    },
   },
 };
 

@@ -8,6 +8,13 @@ import AddIcon from "@material-ui/icons/Add";
 import SubtractIcon from "@material-ui/icons/Remove";
 import Switch from "@material-ui/core/Switch";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 function Home(props) {
   const user = props.user.uid;
@@ -17,6 +24,7 @@ function Home(props) {
   const [account, setAccount] = React.useState();
   const db = firebase.database();
   const userRef = db.ref("/users/" + user);
+  const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
     function GetBeers() {
@@ -44,7 +52,8 @@ function Home(props) {
       count: account + value,
       name: userName,
     });
-    setCount(0)
+    setCount(0);
+    setOpen(false);
   }
 
   if (count < 0) {
@@ -53,9 +62,9 @@ function Home(props) {
 
   return (
     <div id="home">
-      <div>You have to pay {account} beers</div>
-      <div>I would like to</div>
-      <div>
+      <Typography>You have to pay {account} beers!</Typography>
+      <Typography variant="h4">
+        I would like to <br />
         <span>PICK</span>
         <Switch
           name="pay"
@@ -63,21 +72,46 @@ function Home(props) {
           onChange={(event) => setPay(event.target.checked)}
         />
         <span>PAY</span>
-      </div>
+        <div>
+          <Fab onClick={() => setCount(count - 1)}>
+            <SubtractIcon />
+          </Fab>
+          <span id="output">{count}</span>
+          <Fab onClick={() => setCount(count + 1)}>
+            <AddIcon />
+          </Fab>
+        </div>
+        <div>Beers</div>
+      </Typography>
 
-      <div>
-        <Fab onClick={() => setCount(count - 1)}>
-          <SubtractIcon />
-        </Fab>
-        <span id="output">{count}</span>
-        <Fab onClick={() => setCount(count + 1)}>
-          <AddIcon />
-        </Fab>
-      </div>
-      <div>Beers</div>
-      <Button variant="contained" color="primary" disabled={count === 0 ? true : false} onClick={() => CheckOut()}>
+      <Button
+        variant="contained"
+        color="primary"
+        disabled={count === 0 ? true : false}
+        onClick={() => setOpen(true)}
+      >
         Checkout
       </Button>
+      <Dialog
+        open={open}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">Are you sure?</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            You are going to {pay ? "pay" : "pick"} {count} beers.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpen(false)} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={CheckOut} color="primary" autoFocus>
+            OK
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
