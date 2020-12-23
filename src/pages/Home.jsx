@@ -29,7 +29,6 @@ function Home(props) {
 
   React.useEffect(() => {
     function GetBeers() {
-      console.log("start getbeers");
       userRef.on("value", function (value) {
         let output = () => {
           try {
@@ -47,8 +46,6 @@ function Home(props) {
   function CheckOut() {
     const factor = pay ? -1 : 1;
     const value = count * factor;
-    console.log(value);
-    console.log(account);
     userRef.set({
       count: account + value,
       name: userName,
@@ -70,7 +67,16 @@ function Home(props) {
         variant="outlined"
         raised={true}
       >
-        <Typography>You have to pay {account} beers!</Typography>
+        <Typography>
+          You have to pay{" "}
+          <Typography
+            color={account < 0 ? "secondary" : "primary"}
+            component="span"
+          >
+            {account} beer{account > 1 || account < -1 ? "s" : ""}!
+          </Typography>
+        </Typography>
+        <hr />
         <Typography variant="h4">
           I would like to <br />
           <span>PICK</span>
@@ -95,6 +101,7 @@ function Home(props) {
         <br />
         <Button
           variant="contained"
+          raised="true"
           color="primary"
           disabled={count === 0 ? true : false}
           onClick={() => setOpen(true)}
@@ -104,13 +111,20 @@ function Home(props) {
       </Card>
       <Dialog
         open={open}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">Are you sure?</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            You are going to {pay ? "pay" : "pick"} {count} beers.
+            You are going to{" "}
+            <Typography color="primary" component="span">
+              {pay ? "pay" : "pick"} {count} beers.
+            </Typography>
+            <hr />
+            {pay ? "Please give " : "Cost: "}
+            <Typography color="primary" component="span">
+              {count} € 
+            </Typography>
+            {pay ? " to Thomas Gröger" : ""}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

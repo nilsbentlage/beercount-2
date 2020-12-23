@@ -1,4 +1,4 @@
-.App 
+.App
   text-align: center
   height: 100vh
   width: 100vw
@@ -11,7 +11,6 @@
   background-size: cover
   background-position: center
 
-
 header
   height: 64px
 
@@ -20,13 +19,29 @@ header
     display: inline-block
     margin-right: 5vw
 
+.errorMessage
+  position: absolute
+  width: 100vw
+  bottom: 20px
+  display: block
+  text-align: center
+
+  & > p
+    background-color: rgba(255,0,0,0.75)
+    display: inline-block
+    border-radius: 12px
+    padding: 6px 12px
+    max-width: 90vw
+
 #headerFlex
   display: flex
   flex-direction: row
-  justify-content: center
+  justify-content: space-between
   align-items: center
   height: 64px
   color: white
+  padding: 8px 16px
+  box-sizing: border-box
 
 .MuiFormGroup-root
   max-width: 250px
@@ -56,20 +71,22 @@ header
     max-width: 50vw
 
 #home
-  font-size: 130%
-
-  & > div
-    margin: 12px
-
-  & > button
-    margin: 24px
+  width: 90%
+  margin: auto
 
 #output
   display: inline-block
-  width: 33vw
+  width: 5rem
+  padding: .8rem
+  color: black
+  margin: 1rem
+  margin-bottom: 8vw
   font-size: 200%
   position: relative
   top: 10px
+  background-color: white
+  border-radius: 12px
+  box-shadow: inset 3px 3px 10px rgba(0,0,0,0.5)
 
 #accountList
   width: 90%
@@ -80,6 +97,10 @@ header
   overflow-y: scroll
   box-sizing: border-box
 
+#options
+  width: 90%
+  margin: auto
+
 .listItem
   display: flex
   flex-direction: row
@@ -88,4 +109,10 @@ header
   margin: 6px
 
 .MuiDataGrid-columnSeparator
-  display: none !important 
+  display: none !important
+
+.MuiBottomNavigation-root
+  background-color: #f59300 !important
+
+.MuiDataGrid-cellRight::after
+  content: " €"

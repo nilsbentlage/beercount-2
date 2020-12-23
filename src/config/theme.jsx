@@ -3,6 +3,7 @@ const themeConfig = {
   typography: {
     h2: {
       fontFamily: "Roboto Slab",
+      letterSpacing: "3px"
     },
   },
   palette: {

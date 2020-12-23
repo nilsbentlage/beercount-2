@@ -18,14 +18,14 @@ function Accounts(props) {
         type: "number",
         headerName: "Saldo",
         width: 80,
-        flex: 0,
+        flex: 0
       },
     ];
     db.once("value").then((allUserIds) => {
       let output = [];
       for (let userId in allUserIds.val()) {
         let name = allUserIds.val()[userId].name;
-        let value = allUserIds.val()[userId].count * -1 + " €";
+        let value = allUserIds.val()[userId].count * -1;
         let key = userId.slice(0, 4);
         output.push({ id: key, name: name, value: value });
       }

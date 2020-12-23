@@ -1,34 +1,23 @@
 import React from "react";
+import Typography from '@material-ui/core/Typography'
 
 function Splashscreen(props) {
-  
-  function AutoLogin(props) {
-    async function forward() {
-      const user = props.user.uid;
-      user && (window.location.href = "/home");
-    }
-    forward();
-    setTimeout(function () {
-      window.location.href = "/signin";
-    }, 5000);
-  }
+  props.user !== 0
+    ? (window.location.href = "/home")
+    : console.log("no user found");
 
-  React.useEffect(() => {
-    AutoLogin(props);
-  }, [props]);
+  setTimeout(function () {
+    window.location.href = "/signin";
+  }, 3000);
 
   return (
-    <div
-      id="Splashscreen"
-      style={{
-        backgroundImage: "url(" + process.env.PUBLIC_URL + "/background.png)",
-      }}
-    >
+    <div id="Splashscreen">
       <img
         id="Splash-FG"
-        src={process.env.PUBLIC_URL + "/foreground.png"}
+        src={process.env.PUBLIC_URL + "/spinner.svg"}
         alt="Foreground"
       />
+      <Typography style={{maxWidth: "70vw"}}>Checking authentication</Typography>
     </div>
   );
 }

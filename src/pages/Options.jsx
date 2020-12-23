@@ -18,7 +18,7 @@ function Options() {
       });
   };
   return (
-    <div>
+    <div id="options">
       <Typography variant="h2">Options</Typography>
       <br /> <br />
       <Typography variant="body1">
@@ -28,7 +28,12 @@ function Options() {
       </Typography>
       <br />
       <br />
-      <Button variant="contained" color="primary" onClick={Logout}>
+      <Button
+        variant="contained"
+        raised="true"
+        color="primary"
+        onClick={Logout}
+      >
         Logout
       </Button>
     </div>

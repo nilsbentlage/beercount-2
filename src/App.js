@@ -38,8 +38,6 @@ function App() {
     firebase.auth().onAuthStateChanged((answer) => {
       if (answer) {
         setUser(answer);
-      } else {
-        setUser(null);
       }
     });
   }, []);
@@ -53,16 +51,16 @@ function App() {
     >
       <AppBar position="static">
         <div id="headerFlex">
-          <img src={process.env.PUBLIC_URL + "/foreground.png"} alt="Logo" />
           <Typography variant="h4" component="span">
             BeerCount
           </Typography>
+          <img src={process.env.PUBLIC_URL + "/foreground.png"} alt="Logo" />
         </div>
       </AppBar>
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
-            <Splashscreen user={user} />
+            <Splashscreen user={user.uid} />
           </Route>
           <Route path="/signin" component={SignIn} />
           <Route path="/signup" component={SignUp} />
@@ -73,7 +71,7 @@ function App() {
           <Route path="/options" component={Options} />
         </Switch>
       </BrowserRouter>
-      {user ? (
+      {user.uid !== 0 ? (
         <BottomNavigation
           onChange={(event, newValue) => {
             window.location.href = newValue;

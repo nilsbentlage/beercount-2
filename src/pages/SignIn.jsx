@@ -2,7 +2,8 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import FormGroup from "@material-ui/core/FormGroup";
-import Link from '@material-ui/core/Link'
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -27,14 +28,11 @@ function SignIn() {
       .signInWithEmailAndPassword(email, password)
       .then(
         function (answer) {
-          setEmail("");
-          setPassword("");
           window.location.href = "/home";
           console.log("success");
         },
         function (error) {
           setError(error);
-          console.log(error);
         }
       );
   };
@@ -42,14 +40,13 @@ function SignIn() {
   return (
     <form>
       <FormGroup>
+        <Typography variant="h2">Login</Typography>
+        <br /> <br />
         <TextField
           error={error.code === "auth/invalid-email" ? true : false}
           value={email}
           label="E-Mail"
           onChange={(event) => setEmail(event.target.value)}
-          helperText={
-            error.code === "auth/invalid-email" ? error.message : null
-          }
           autoComplete="email"
           autoFocus={true}
         />
@@ -59,22 +56,20 @@ function SignIn() {
           label="Password"
           type="password"
           onChange={(event) => setPassword(event.target.value)}
-          helperText={
-            error.code === "auth/wrong-password" ? error.message : null
-          }
           autoComplete="current-password"
-
         />
         <Button
           variant="contained"
           type="submit"
           color="primary"
+          raised="true"
           onClick={(event) => Login(event)}
         >
           Login
         </Button>
         <Link href="/signup">Create a new Account</Link>
       </FormGroup>
+      <div className="errorMessage">{error.code && <Typography variant="caption" component="p">{error.message}</Typography>}</div>
     </form>
   );
 }
