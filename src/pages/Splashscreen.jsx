@@ -1,14 +1,17 @@
 import React from "react";
-import Typography from '@material-ui/core/Typography'
+import Typography from "@material-ui/core/Typography";
+import { useRecoilValue } from "recoil";
+import userState from "../atoms/userState";
+import {Redirect} from 'react-router-dom'
+  
+function Splashscreen() {
+  const user = useRecoilValue(userState).uid;
 
-function Splashscreen(props) {
-  props.user !== 0
-    ? (window.location.href = "/home")
-    : console.log("no user found");
+  user ? <Redirect to="/home" /> : console.log("no user found");
 
   setTimeout(function () {
-    window.location.href = "/signin";
-  }, 3000);
+    <Redirect to="/signin" />;
+  }, 1000);
 
   return (
     <div id="Splashscreen">
@@ -17,7 +20,9 @@ function Splashscreen(props) {
         src={process.env.PUBLIC_URL + "/spinner.svg"}
         alt="Foreground"
       />
-      <Typography style={{maxWidth: "70vw"}}>Checking authentication</Typography>
+      <Typography style={{ maxWidth: "70vw" }}>
+        Checking authentication
+      </Typography>
     </div>
   );
 }

@@ -17,9 +17,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
-function Home(props) {
-  const user = props.user.uid;
-  const userName = props.user.displayName;
+import { useRecoilValue } from "recoil";
+import userState from "../atoms/userState";
+
+function Home() {
+  const user = useRecoilValue(userState).uid;
+  const userName = useRecoilValue(userState).displayName;
   const [count, setCount] = React.useState(0);
   const [pay, setPay] = React.useState(false);
   const [account, setAccount] = React.useState();
@@ -41,7 +44,7 @@ function Home(props) {
       });
     }
     GetBeers();
-  }, [account, userRef]);
+  }, [userRef]);
 
   function CheckOut() {
     const factor = pay ? -1 : 1;
@@ -66,6 +69,7 @@ function Home(props) {
         style={{ display: "inline-block", maxWidth: "90%", padding: "24px" }}
         variant="outlined"
         raised={true}
+        component="div"
       >
         <Typography>
           You have to pay{" "}
@@ -109,9 +113,7 @@ function Home(props) {
           Checkout
         </Button>
       </Card>
-      <Dialog
-        open={open}
-      >
+      <Dialog open={open}>
         <DialogTitle id="alert-dialog-title">Are you sure?</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -122,7 +124,7 @@ function Home(props) {
             <hr />
             {pay ? "Please give " : "Cost: "}
             <Typography color="primary" component="span">
-              {count} € 
+              {count} €
             </Typography>
             {pay ? " to Thomas Gröger" : ""}
           </DialogContentText>

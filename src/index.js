@@ -1,24 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
-import { RecoilRoot } from "recoil";
+import App from "./App.jsx";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
-import { ThemeProvider, createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
-import themeConfig from './config/theme.jsx'
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import themeConfig from "./config/theme.jsx";
+import { RecoilRoot } from "recoil";
 
 let theme = createMuiTheme(themeConfig);
 
-theme = responsiveFontSizes(theme);
-
 ReactDOM.render(
-  <RecoilRoot>
-    <ThemeProvider theme={theme}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </ThemeProvider>
-  </RecoilRoot>,
+  <ThemeProvider theme={theme}>
+    <React.StrictMode>
+      <RecoilRoot>
+          <App />
+      </RecoilRoot>
+    </React.StrictMode>
+  </ThemeProvider>,
   document.getElementById("root")
 );
 

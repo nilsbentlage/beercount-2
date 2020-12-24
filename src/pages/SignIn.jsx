@@ -28,8 +28,8 @@ function SignIn() {
       .signInWithEmailAndPassword(email, password)
       .then(
         function (answer) {
+          console.log(answer)
           window.location.href = "/home";
-          console.log("success");
         },
         function (error) {
           setError(error);
@@ -69,7 +69,13 @@ function SignIn() {
         </Button>
         <Link href="/signup">Create a new Account</Link>
       </FormGroup>
-      <div className="errorMessage">{error.code && <Typography variant="caption" component="p">{error.message}</Typography>}</div>
+      <div className="errorMessage">
+        {error.code && (
+          <Typography variant="caption" component="p">
+            {error.message}
+          </Typography>
+        )}
+      </div>
     </form>
   );
 }
