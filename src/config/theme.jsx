@@ -5,6 +5,10 @@ const themeConfig = {
       fontFamily: "Roboto Slab",
       letterSpacing: "3px"
     },
+    h3: {
+      fontFamily: "Roboto Slab",
+    },
+    fontSize: 16,
   },
   palette: {
     type: "dark",

@@ -71,7 +71,7 @@ function Home() {
         raised={true}
         component="div"
       >
-        <Typography>
+        <Typography component="span">
           You have to pay{" "}
           <Typography
             color={account < 0 ? "secondary" : "primary"}

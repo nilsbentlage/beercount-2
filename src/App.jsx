@@ -9,8 +9,7 @@ import "firebase/auth";
 import WebFont from "webfontloader";
 
 import BottomMenu from "./components/BottomMenu";
-import AppBar from "@material-ui/core/AppBar";
-import { Typography } from "@material-ui/core";
+import AppHeader from "./components/AppHeader";
 
 import Splashscreen from "./pages/Splashscreen";
 import SignIn from "./pages/SignIn";
@@ -18,12 +17,12 @@ import SignUp from "./pages/SignUp";
 import Home from "./pages/Home";
 import Accounts from "./pages/Accounts";
 import Options from "./pages/Options";
+
 import { useSetRecoilState } from "recoil";
 import userState from "./atoms/userState";
+import entryArray from "./atoms/entryArray";
 
-import foregroundImage from "./foreground.png";
-
-import {Router, useHistory} from 'react-dom'
+import { BrowserRouter as Router } from "react-router-dom";
 
 firebase.initializeApp(firebaseConfig);
 
@@ -35,8 +34,7 @@ function App() {
   });
 
   const setUser = useSetRecoilState(userState);
-  const history = useHistory()
-
+  const setEntryArray = useSetRecoilState(entryArray);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(
@@ -53,27 +51,37 @@ function App() {
     );
   }, [setUser]);
 
+  useEffect(() => {
+    firebase
+      .database()
+      .ref("/users")
+      .on("value", (allUserIds) => {
+        let output = [];
+        for (let userId in allUserIds.val()) {
+          let name = allUserIds.val()[userId].name;
+          let value = allUserIds.val()[userId].count * -1;
+          let key = userId;
+          output.push({ id: key, name: name, value: value });
+        }
+        setEntryArray(output);
+      });
+  }, [setEntryArray]);
+
+  return (
     <div className="App">
-      <AppBar position="static">
-        <div id="headerFlex">
-          <Typography variant="h4" component="span">
-            BeerCount
-          </Typography>
-          <img src={foregroundImage} alt="Logo" />
-        </div>
-      </AppBar>
-      <Router history={history}>
-      <Switch>
-        <Route exact path="/" component={Splashscreen} />
-        <Route exact path="/signin" component={SignIn} />
-        <Route exact path="/signup" component={SignUp} />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/accounts" component={Accounts} />
-        <Route exact path="/options" component={Options} />
-      </Switch>
-      <BottomMenu />
+      <AppHeader />
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Splashscreen} />
+          <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/accounts" component={Accounts} />
+          <Route exact path="/options" component={Options} />
+        </Switch>
+        <BottomMenu />
       </Router>
     </div>
-  ;
+  );
 }
 export default App;

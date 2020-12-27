@@ -90,7 +90,6 @@ function SignUp() {
           type="submit"
           variant="contained"
           color="primary"
-          raised="true"
           onClick={(event) => createUser(event)}
         >
           SignUp
