@@ -19,47 +19,42 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 import { useRecoilValue } from "recoil";
 import userState from "../atoms/userState";
+import personalCounter from "../atoms/personalCounter";
 
 function Home() {
-  const user = useRecoilValue(userState).uid;
-  const userName = useRecoilValue(userState).displayName;
+  const user = useRecoilValue(userState);
+  const account = useRecoilValue(personalCounter);
   const [count, setCount] = React.useState(0);
   const [pay, setPay] = React.useState(false);
-  const [account, setAccount] = React.useState();
-  const db = firebase.database();
-  const userRef = db.ref("/users/" + user);
   const [open, setOpen] = React.useState(false);
 
-  React.useEffect(() => {
-    function GetBeers() {
-      userRef.on("value", function (value) {
-        let output = () => {
-          try {
-            return value.val().count;
-          } catch {
-            return 0;
-          }
-        };
-        setAccount(output);
-      });
-    }
-    GetBeers();
-  }, [userRef]);
+  const db = firebase.database();
+  const userRef = db.ref("/users/" + user.uid);
 
   function CheckOut() {
+    setOpen(false);
+
     const factor = pay ? -1 : 1;
     const value = count * factor;
+    const newValue = account + value;
     userRef.set({
-      count: account + value,
-      name: userName,
+      // I dont know why i have to choose * -1 but it works like that, i guess the function is somehow executed twice
+      count: newValue * -1,
+      name: user.displayName,
     });
     setCount(0);
-    setOpen(false);
   }
 
   if (count < 0) {
     setCount(0);
   }
+
+  const Animation = () => {
+    document.getElementById("output").className = "counter";
+    setTimeout(() => {
+      document.getElementById("output").classList.toggle("counter");
+    }, 500);
+  };
 
   return (
     <div id="home">
@@ -91,11 +86,21 @@ function Home() {
           />
           <span>PAY</span>
           <div>
-            <Fab onClick={() => setCount(count - 1)}>
+            <Fab
+              onClick={() => {
+                setCount(count - 1);
+                Animation();
+              }}
+            >
               <SubtractIcon />
             </Fab>
             <span id="output">{count}</span>
-            <Fab onClick={() => setCount(count + 1)}>
+            <Fab
+              onClick={() => {
+                setCount(count + 1);
+                Animation();
+              }}
+            >
               <AddIcon />
             </Fab>
           </div>

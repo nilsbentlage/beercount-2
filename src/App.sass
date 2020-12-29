@@ -23,9 +23,20 @@ header
 .errorMessage
   position: absolute
   width: 100vw
-  bottom: 20px
+  bottom: 120px
   display: block
   text-align: center
+
+.counter
+  animation: countup .5s
+
+@keyframes countup
+  0%
+    transform: scale(1.2)
+  100%
+    transform: Scale(1)
+
+  
 
   & > p
     background-color: rgba(255,0,0,0.75)
@@ -64,11 +75,21 @@ header
   align-items: center
 
   & img
-    max-width: 50vw
+    max-width: 80vw
+    animation: 2s slidein
+
+@keyframes slidein
+  0%
+    opacity: 0
+    transform: translateY(20px)
+
+  100%
+    opacity: 1
 
 #home
   width: 90%
   margin: auto
+  animation: .2s slidein
 
 #output
   display: inline-block
@@ -92,10 +113,12 @@ header
   min-height: 55vh
   overflow-y: scroll
   box-sizing: border-box
+  animation: .2s slidein
 
 #options
   width: 90%
   margin: auto
+  animation: .2s slidein
 
 .listItem
   display: flex
