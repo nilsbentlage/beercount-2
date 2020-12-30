@@ -33,13 +33,11 @@ function Home() {
 
   function CheckOut() {
     setOpen(false);
-
     const factor = pay ? -1 : 1;
     const value = count * factor;
     const newValue = account + value;
     userRef.set({
-      // I dont know why i have to choose * -1 but it works like that, i guess the function is somehow executed twice
-      count: newValue * -1,
+      count: newValue,
       name: user.displayName,
     });
     setCount(0);
@@ -48,13 +46,6 @@ function Home() {
   if (count < 0) {
     setCount(0);
   }
-
-  const Animation = () => {
-    document.getElementById("output").className = "counter";
-    setTimeout(() => {
-      document.getElementById("output").classList.toggle("counter");
-    }, 500);
-  };
 
   return (
     <div id="home">
@@ -89,17 +80,12 @@ function Home() {
             <Fab
               onClick={() => {
                 setCount(count - 1);
-                Animation();
               }}
             >
               <SubtractIcon />
             </Fab>
             <span id="output">{count}</span>
-            <Fab
-              onClick={() => {
-                setCount(count + 1);
-                Animation();
-              }}
+            <Fab onClick={() => setCount(count + 1)}
             >
               <AddIcon />
             </Fab>
@@ -126,12 +112,11 @@ function Home() {
             <Typography color="primary" component="span">
               {pay ? "pay" : "pick"} {count} beers.
             </Typography>
-            <hr />
-            {pay ? "Please give " : "Cost: "}
-            <Typography color="primary" component="span">
-              {count} €
-            </Typography>
-            {pay ? " to Thomas Gröger" : ""}
+              {pay ? "Please give " : "Cost: "}
+              <Typography color="primary" component="span">
+                {count} €
+              </Typography>
+              {pay ? " to Thomas Gröger" : ""}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

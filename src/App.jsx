@@ -21,7 +21,7 @@ import Options from "./pages/Options";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import userState from "./atoms/userState";
 import entryArray from "./atoms/entryArray";
-import personalCounter from "./atoms/personalCounter"
+import personalCounter from "./atoms/personalCounter";
 
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -36,7 +36,7 @@ function App() {
 
   const [user, setUser] = useRecoilState(userState);
   const setEntryArray = useSetRecoilState(entryArray);
-  const setPersonalCounter = useSetRecoilState(personalCounter)
+  const setPersonalCounter = useSetRecoilState(personalCounter);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(
@@ -60,12 +60,12 @@ function App() {
       .on("value", (allUserIds) => {
         let output = [];
         for (let userId in allUserIds.val()) {
-          let name = allUserIds.val()[userId].name; 
-          let value = allUserIds.val()[userId].count * -1;
+          let name = allUserIds.val()[userId].name;
+          let value = allUserIds.val()[userId].count;
           let key = userId;
           output.push({ id: key, name: name, value: value });
           if (userId === user.uid) {
-            setPersonalCounter(value)
+            setPersonalCounter(value);
           }
         }
         setEntryArray(output);

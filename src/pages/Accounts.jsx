@@ -1,6 +1,6 @@
-import { DataGrid } from "@material-ui/data-grid";
+import DataGrid from "@material-ui/data-grid";
 import Card from "@material-ui/core/Card";
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core";
 import { useRecoilValue } from "recoil";
 import entryArray from "../atoms/entryArray";
 
