@@ -3,9 +3,8 @@ import { Switch, Route } from "react-router-dom";
 
 import firebase from "firebase/app";
 import firebaseConfig from "./config/firebase";
-import "firebase/auth";
 
-import useAppInit from "./functions/useAppInit";
+import useAppInit from "./hooks/useAppInit";
 
 import WebFont from "webfontloader";
 
