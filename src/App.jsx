@@ -1,10 +1,11 @@
-import { useEffect } from "react";
 import "./App.sass";
 import { Switch, Route } from "react-router-dom";
 
 import firebase from "firebase/app";
 import firebaseConfig from "./config/firebase";
 import "firebase/auth";
+
+import useAppInit from "./functions/useAppInit";
 
 import WebFont from "webfontloader";
 
@@ -18,11 +19,6 @@ import Home from "./pages/Home";
 import Accounts from "./pages/Accounts";
 import Options from "./pages/Options";
 
-import { useRecoilState, useSetRecoilState } from "recoil";
-import userState from "./atoms/userState";
-import entryArray from "./atoms/entryArray";
-import personalCounter from "./atoms/personalCounter";
-
 import { BrowserRouter as Router } from "react-router-dom";
 import { Grid } from "@material-ui/core";
 
@@ -35,52 +31,11 @@ function App() {
     },
   });
 
-  const [user, setUser] = useRecoilState(userState);
-  const setEntryArray = useSetRecoilState(entryArray);
-  const setPersonalCounter = useSetRecoilState(personalCounter);
-
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(
-      (answer) => {
-        console.log("AppJSX got new user data");
-        if (answer) {
-          setUser(answer);
-          console.log("AppJSX wrote new user data");
-        }
-      },
-      (error) => {
-        console.log(error.message);
-      }
-    );
-  }, [setUser]);
-
-  useEffect(() => {
-    firebase
-      .database()
-      .ref("/users")
-      .on("value", (allUserIds) => {
-        let output = [];
-        for (let userId in allUserIds.val()) {
-          let name = allUserIds.val()[userId].name;
-          let value = allUserIds.val()[userId].count;
-          let key = userId;
-          output.push({ id: key, name: name, value: value });
-          if (userId === user.uid) {
-            setPersonalCounter(value);
-          }
-        }
-        setEntryArray(output);
-      });
-  }, [setPersonalCounter, setEntryArray, user]);
+  useAppInit();
 
   return (
     <Router>
-      <Grid
-        container
-        id="App"
-        alignContent="space-between"
-        justify="center"
-      >
+      <Grid container id="App" alignContent="space-between" justify="center">
         <Grid item xs={12}>
           <AppHeader />
         </Grid>
