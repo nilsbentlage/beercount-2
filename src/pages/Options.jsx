@@ -2,9 +2,10 @@ import React from "react";
 import firebase from "firebase/app";
 import "firebase/auth";
 import Button from "@material-ui/core/Button";
-import { Typography } from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
 
 import { useRecoilValue } from "recoil";
 import userState from "../atoms/userState";
@@ -25,41 +26,44 @@ function Options() {
       });
   };
   return (
-    <div id="options">
-      <Typography variant="h2">Options</Typography>
-      <br />
-      <br />
-      <Card
-        style={{ display: "inline-block", maxWidth: "90%", padding: "24px" }}
-        variant="outlined"
-        raised={true}
-        component="div"
-      >
-        <Typography variant="body2">
+    <Grid
+      item
+      container
+      spacing={8}
+      xs={12}
+      justify="center"
+      alignItems="center"
+      alignContent="center"
+      className="animate"
+    >
+      <Grid item xs={10}>
+        <Typography variant="h2" align="center">
+          Options
+        </Typography>
+      </Grid>
+      <Grid item xs={10} component={Card} className="customCard" align="center">
+        <Typography variant="body2" align="center">
           You are logged in as {user.displayName} <br />
         </Typography>
-        <Typography variant="overline">{user.email}</Typography>
-        <br />
-        <br />
+        <Typography align="center" variant="overline">
+          {user.email}
+        </Typography> <br /><br />
         <Button
           variant="contained"
           raised="true"
           color="primary"
           onClick={Logout}
-        >
-          Logout
-        </Button>
-      </Card>
-      <br />
-      <br />
-      <Typography variant="body1">
-        Copyright & Support
-        <br />
-        <Link to="mailto:bentlage@symmedia.de" alt="E-Mail">
-          Nils Bentlage
-        </Link>
-      </Typography>{" "}
-    </div>
+        >Logout</Button>
+      </Grid>
+      <Grid item xs={10}>
+        <Typography variant="body1" align="center" color="textPrimary">
+          Copyright & Support <br />
+          <Link to="mailto:bentlage@symmedia.de" alt="E-Mail">
+            Nils Bentlage
+          </Link>
+        </Typography>
+      </Grid>
+    </Grid>
   );
 }
 

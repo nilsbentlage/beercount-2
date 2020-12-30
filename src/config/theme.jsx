@@ -1,12 +1,28 @@
 const themeConfig = {
   spacing: 8,
   typography: {
+    fontFamily: "Roboto Slab",
     h2: {
-      fontFamily: "Roboto Slab",
-      letterSpacing: "3px"
+      letterSpacing: "3px",
+      color: "#ffffff",
     },
     h3: {
-      fontFamily: "Roboto Slab",
+      color: "#ffffff",
+    },
+    h4: {
+      color: "#ffffff",
+    },
+    body1: {
+      fontFamily: "Roboto",
+    },
+    body2: {
+      fontFamily: "Roboto",
+    },
+    caption: {
+      fontFamily: "Roboto",
+    },
+    overline: {
+      fontFamily: "Roboto",
     },
     fontSize: 16,
   },

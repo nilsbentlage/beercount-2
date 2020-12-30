@@ -24,6 +24,7 @@ import entryArray from "./atoms/entryArray";
 import personalCounter from "./atoms/personalCounter";
 
 import { BrowserRouter as Router } from "react-router-dom";
+import { Grid } from "@material-ui/core";
 
 firebase.initializeApp(firebaseConfig);
 
@@ -73,9 +74,16 @@ function App() {
   }, [setPersonalCounter, setEntryArray, user]);
 
   return (
-    <div className="App">
-      <AppHeader />
-      <Router>
+    <Router>
+      <Grid
+        container
+        id="App"
+        alignContent="space-between"
+        justify="center"
+      >
+        <Grid item xs={12}>
+          <AppHeader />
+        </Grid>
         <Switch>
           <Route exact path="/" component={Splashscreen} />
           <Route exact path="/signin" component={SignIn} />
@@ -84,9 +92,11 @@ function App() {
           <Route exact path="/accounts" component={Accounts} />
           <Route exact path="/options" component={Options} />
         </Switch>
-        <BottomMenu />
-      </Router>
-    </div>
+        <Grid item xs={12}>
+          <BottomMenu />
+        </Grid>
+      </Grid>
+    </Router>
   );
 }
 export default App;

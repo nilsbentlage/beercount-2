@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import FormGroup from "@material-ui/core/FormGroup";
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
+import Grid from '@material-ui/core/Grid'
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -28,7 +29,7 @@ function SignIn() {
       .signInWithEmailAndPassword(email, password)
       .then(
         function (answer) {
-          console.log(answer)
+          console.log(answer);
           window.location.href = "/home";
         },
         function (error) {
@@ -38,44 +39,52 @@ function SignIn() {
   };
 
   return (
-    <form>
-      <FormGroup>
-        <Typography variant="h2">Login</Typography>
-        <br /> <br />
-        <TextField
-          error={error.code === "auth/invalid-email" ? true : false}
-          value={email}
-          label="E-Mail"
-          onChange={(event) => setEmail(event.target.value)}
-          autoComplete="email"
-          autoFocus={true}
-        />
-        <TextField
-          error={error.code === "auth/wrong-password" ? true : false}
-          value={password}
-          label="Password"
-          type="password"
-          onChange={(event) => setPassword(event.target.value)}
-          autoComplete="current-password"
-        />
-        <Button
-          variant="contained"
-          type="submit"
-          color="primary"
-          onClick={(event) => Login(event)}
-        >
-          Login
-        </Button>
-        <Link href="/signup">Create a new Account</Link>
-      </FormGroup>
-      <div className="errorMessage">
-        {error.code && (
-          <Typography variant="caption" component="p">
-            {error.message}
-          </Typography>
-        )}
-      </div>
-    </form>
+    <Grid item container xs={12} justify="center" spacing={4}>         
+      <Grid item xs={8}>
+        <Typography variant="h2" align="center">Login</Typography>
+      </Grid>
+      <Grid item xs={8} align="center">
+      <form>
+        <FormGroup>
+          <TextField
+            error={error.code === "auth/invalid-email" ? true : false}
+            value={email}
+            label="E-Mail"
+            onChange={(event) => setEmail(event.target.value)}
+            autoComplete="email"
+            autoFocus={true}
+            className="loginform"
+          />
+          <TextField
+            error={error.code === "auth/wrong-password" ? true : false}
+            value={password}
+            label="Password"
+            type="password"
+            onChange={(event) => setPassword(event.target.value)}
+            autoComplete="current-password"
+            className="loginform"
+          />
+          <Button
+            variant="contained"
+            type="submit"
+            color="primary"
+            onClick={(event) => Login(event)}
+            className="loginform"
+          >
+            Login
+          </Button>
+          <Link href="/signup">Create a new Account</Link>
+        </FormGroup>
+        <div className="errorMessage">
+          {error.code && (
+            <Typography variant="h6" component="p">
+              {error.message}
+            </Typography>
+          )}
+        </div>
+      </form>
+      </Grid>
+    </Grid>
   );
 }
 

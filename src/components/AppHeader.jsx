@@ -1,15 +1,11 @@
 import React from "react";
-import { AppBar, Typography } from "@material-ui/core";
+import foreground from "../foreground.png";
 
 function AppHeader() {
   return (
-    <AppBar position="static">
-      <div id="headerFlex">
-        <Typography variant="h3" component="span">
-          BeerCount
-        </Typography>
-      </div>
-    </AppBar>
+    <div id="header">
+      <img src={foreground} alt="Logo" />
+    </div>
   );
 }
 

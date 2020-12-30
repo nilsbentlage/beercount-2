@@ -8,7 +8,7 @@ import AddIcon from "@material-ui/icons/Add";
 import SubtractIcon from "@material-ui/icons/Remove";
 import Switch from "@material-ui/core/Switch";
 import Button from "@material-ui/core/Button";
-import Card from "@material-ui/core/Card";
+import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 
 import Dialog from "@material-ui/core/Dialog";
@@ -16,6 +16,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Grid from "@material-ui/core/Grid";
+import Divider from "@material-ui/core/Divider";
 
 import { useRecoilValue } from "recoil";
 import userState from "../atoms/userState";
@@ -48,35 +50,55 @@ function Home() {
   }
 
   return (
-    <div id="home">
-      <Typography variant="h2">Pick'n'Pay</Typography>
-      <br /> <br />
-      <Card
-        style={{ display: "inline-block", maxWidth: "90%", padding: "24px" }}
-        variant="outlined"
-        raised={true}
-        component="div"
+    <>
+      <Grid
+        item
+        xs={12}
+        container
+        direction="column"
+        alignContent="center"
+        alignItems="center"
+        spacing={6}
+        className="animate"
       >
-        <Typography component="span">
-          You have to pay{" "}
-          <Typography
-            color={account < 0 ? "secondary" : "primary"}
-            component="span"
-          >
-            {account} beer{account > 1 || account < -1 ? "s" : ""}!
-          </Typography>
-        </Typography>
-        <hr />
-        <Typography variant="h4">
-          I would like to <br />
-          <span>PICK</span>
-          <Switch
-            name="pay"
-            value={pay}
-            onChange={(event) => setPay(event.target.checked)}
-          />
-          <span>PAY</span>
-          <div>
+        <Grid item xs={10}>
+          <Typography variant="h2">Pick'n'Pay</Typography>
+        </Grid>
+        <Grid
+          item
+          xs={10}
+          container
+          component={Paper}
+          spacing={2}
+          direction="column"
+          alignItems="center"
+          className="customCard"
+        >
+          <Grid item xs={12}>
+            <Typography>
+              You have to pay{" "}
+              <Typography
+                color={account < 0 ? "secondary" : "primary"}
+                component="span"
+              >
+                {account} beer{account > 1 || account < -1 ? "s" : ""}!
+              </Typography>
+            </Typography>
+            <Divider />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h4">
+              I would like to <br />
+              PICK
+              <Switch
+                name="pay"
+                value={pay}
+                onChange={(event) => setPay(event.target.checked)}
+              />
+              PAY
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
             <Fab
               onClick={() => {
                 setCount(count - 1);
@@ -85,25 +107,27 @@ function Home() {
               <SubtractIcon />
             </Fab>
             <span id="output">{count}</span>
-            <Fab onClick={() => setCount(count + 1)}
-            >
+            <Fab onClick={() => setCount(count + 1)}>
               <AddIcon />
             </Fab>
-          </div>
-          <div>Beers</div>
-        </Typography>
-        <br />
-        <br />
-        <Button
-          variant="contained"
-          raised="true"
-          color="primary"
-          disabled={count === 0 ? true : false}
-          onClick={() => setOpen(true)}
-        >
-          Checkout
-        </Button>
-      </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h4">Beers</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Button
+              variant="contained"
+              raised="true"
+              color="primary"
+              disabled={count === 0 ? true : false}
+              onClick={() => setOpen(true)}
+            >
+              Checkout
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
+
       <Dialog open={open}>
         <DialogTitle id="alert-dialog-title">Are you sure?</DialogTitle>
         <DialogContent>
@@ -111,12 +135,13 @@ function Home() {
             You are going to{" "}
             <Typography color="primary" component="span">
               {pay ? "pay" : "pick"} {count} beers.
+            </Typography>{" "}
+            <br />
+            {pay ? "Please give " : "Cost: "}
+            <Typography color="primary" component="span">
+              {count} €
             </Typography>
-              {pay ? "Please give " : "Cost: "}
-              <Typography color="primary" component="span">
-                {count} €
-              </Typography>
-              {pay ? " to Thomas Gröger" : ""}
+            {pay ? " to Thomas Gröger" : ""}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -128,7 +153,7 @@ function Home() {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   );
 }
 

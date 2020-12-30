@@ -1,6 +1,8 @@
-import DataGrid from "@material-ui/data-grid";
+import { DataGrid } from "@material-ui/data-grid";
 import Card from "@material-ui/core/Card";
-import Typography from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+
 import { useRecoilValue } from "recoil";
 import entryArray from "../atoms/entryArray";
 
@@ -19,13 +21,25 @@ function Accounts() {
   const entries = useRecoilValue(entryArray);
 
   return (
-    <div id="accountList">
-      <Typography variant="h2">Account Overview</Typography>
-      <br /> <br />
-      <Card style={{ height: "50vh" }} variant="outlined" raised={true}>
+    <Grid
+      item
+      container
+      className="animate"
+      spacing={8}
+      xs={12}
+      justify="center"
+      alignItems="center"
+      alignContent="center"
+    >
+      <Grid item xs={10}>
+        <Typography variant="h2" align="center">
+          Account Overview
+        </Typography>
+      </Grid>
+      <Grid component={Card} item xs={10} id="dataGrid" className="customCard">
         <DataGrid autoPageSize={true} rows={entries} columns={columns} />
-      </Card>
-    </div>
+      </Grid>
+    </Grid>
   );
 }
 
