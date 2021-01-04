@@ -35,7 +35,7 @@ function Home() {
 
   function CheckOut() {
     setOpen(false);
-    const factor = pay ? -1 : 1;
+    const factor = pay ? 1 : -1;
     const value = count * factor;
     const newValue = account + value;
     userRef.set({
@@ -58,7 +58,7 @@ function Home() {
         direction="column"
         alignContent="center"
         alignItems="center"
-        spacing={6}
+        spacing={8}
         className="animate"
       >
         <Grid item xs={10}>
@@ -81,7 +81,7 @@ function Home() {
                 color={account < 0 ? "secondary" : "primary"}
                 component="span"
               >
-                {account} beer{account > 1 || account < -1 ? "s" : ""}!
+                {account * -1} beer{account > 1 || account < -1 ? "s" : ""}!
               </Typography>
             </Typography>
             <Divider />
