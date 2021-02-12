@@ -78,7 +78,7 @@ function Home() {
             <Typography>
               You have to pay{" "}
               <Typography
-                color={account < 0 ? "secondary" : "primary"}
+                color={account < 0 ? "primary" : "secondary"}
                 component="span"
               >
                 {account * -1} beer{account > 1 || account < -1 ? "s" : ""}!
