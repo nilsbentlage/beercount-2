@@ -1,7 +1,6 @@
 ## BeerCount 2
 __The best pwa to track your Beer-Consumption__
 
----
 BeerCount is a React-PWA built with Material-UI & Firebase. You can get an account via [beercount-2.web.app](beercount-2.web.app) or host your own instance of this project.
 
 ### How to setup my own environment?
