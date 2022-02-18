@@ -78,13 +78,16 @@ function Home() {
         >
           <Grid item xs={12}>
             <Typography>
-              You have to pay{" "}
+              You have to
               <Typography
-                color={account < 0 ? "primary" : "secondary"}
+                color={account < 0 ? "error" : "secondary"}
                 component="span"
               >
-                {account * -1} beer{account > 1 || account < -1 ? "s" : ""}!
+                {account >= 0 ? " drink" : " pay"}{" "}
+                {account >= 0 ? account : account * -1} beer
+                {account > 1 || account < -1 ? "s" : ""}
               </Typography>
+              !
             </Typography>
             <Divider />
           </Grid>
@@ -100,8 +103,15 @@ function Home() {
               PAY
             </Typography>
           </Grid>
-          <Grid item xs={12}>
+          <Grid
+            item
+            container
+            xs={12}
+            alignItems="center"
+            justifyContent="center"
+          >
             <Fab
+              disabled={count === 0 ? true : false}
               onClick={() => {
                 setCount(count - 1);
               }}

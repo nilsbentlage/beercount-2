@@ -8,13 +8,13 @@ import entryArray from "../atoms/entryArray";
 
 function Accounts() {
   const columns = [
-    { field: "name", headerName: "Name", flex: 2 },
+    { field: "name", headerName: "Name", flex: 1 },
     {
       field: "value",
       type: "number",
       headerName: "Saldo",
       width: 80,
-      flex: 0,
+      flex: 1,
     },
   ];
 
@@ -37,7 +37,7 @@ function Accounts() {
         </Typography>
       </Grid>
       <Grid component={Card} item xs={10} id="dataGrid" className="customCard">
-        <DataGrid autoPageSize={true} rows={entries} columns={columns} />
+        <DataGrid autoPageSize={true} rows={entries} columns={columns}/>
       </Grid>
     </Grid>
   );
