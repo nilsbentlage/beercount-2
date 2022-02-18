@@ -33,7 +33,7 @@ function Home() {
   const db = firebase.database();
   const userRef = db.ref("/users/" + user.uid);
 
- function CheckOut() {
+  function CheckOut() {
     setOpen(false);
     const newValue = pay === true ? account + count : account - count;
     userRef.set({
@@ -60,7 +60,9 @@ function Home() {
         className="animate"
       >
         <Grid item xs={10}>
-          <Typography variant="h2">Pick'n'Pay</Typography>
+          <Typography variant="h2" align="center">
+            Pick'n'Pay
+          </Typography>
         </Grid>
         <Grid
           item
@@ -87,7 +89,7 @@ function Home() {
             <Divider />
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h4">
+            <Typography variant="h4" align="center">
               I would like to <br />
               PICK
               <Switch

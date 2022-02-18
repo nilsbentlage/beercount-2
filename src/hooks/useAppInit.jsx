@@ -14,10 +14,8 @@ function useAppInit() {
   useEffect(() => {
     firebase.auth().onAuthStateChanged(
       (answer) => {
-        console.log("AppJSX got new user data");
         if (answer) {
           setUser(answer);
-          console.log("AppJSX wrote new user data");
         }
       },
       (error) => {

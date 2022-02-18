@@ -34,7 +34,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build ",
-    "deploy": "firebase deploy",
+    "deploy": "react-scripts build && firebase deploy",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

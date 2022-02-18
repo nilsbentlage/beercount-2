@@ -18,7 +18,7 @@ function Accounts() {
     },
   ];
 
-  const entries = useRecoilValue(entryArray);
+  let entries = useRecoilValue(entryArray);
 
   return (
     <Grid

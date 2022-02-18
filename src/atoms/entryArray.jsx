@@ -1,6 +1,8 @@
 import { atom } from "recoil";
 
 const entryArray = atom({
-  key: "app"});
+  key: "app",
+  default: [],
+});
 
-export default entryArray
+export default entryArray;
