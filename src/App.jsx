@@ -34,7 +34,12 @@ function App() {
 
   return (
     <Router>
-      <Grid container id="App" alignContent="space-between" justify="center">
+      <Grid
+        container
+        id="App"
+        alignContent="space-between"
+        justifyContent="center"
+      >
         <Grid item xs={12}>
           <AppHeader />
         </Grid>

@@ -33,11 +33,9 @@ function Home() {
   const db = firebase.database();
   const userRef = db.ref("/users/" + user.uid);
 
-  function CheckOut() {
+ function CheckOut() {
     setOpen(false);
-    const factor = pay ? 1 : -1;
-    const value = count * factor;
-    const newValue = account + value;
+    const newValue = pay === true ? account + count : account - count;
     userRef.set({
       count: newValue,
       name: user.displayName,
@@ -55,9 +53,9 @@ function Home() {
         item
         xs={12}
         container
-        direction="column"
         alignContent="center"
         alignItems="center"
+        justifyContent="center"
         spacing={8}
         className="animate"
       >
@@ -70,7 +68,9 @@ function Home() {
           container
           component={Paper}
           spacing={2}
+          alignContent="center"
           direction="column"
+          justifyContent="center"
           alignItems="center"
           className="customCard"
         >

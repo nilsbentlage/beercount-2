@@ -53,7 +53,7 @@ function SignUp() {
   };
 
   return (
-    <Grid item container xs={12} justify="center" spacing={4}>
+    <Grid item container xs={12} justifyContent="center" spacing={4}>
       <Grid item xs={8}>
         <Typography variant="h2" align="center">Register</Typography>
       </Grid>

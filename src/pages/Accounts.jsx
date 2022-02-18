@@ -27,7 +27,7 @@ function Accounts() {
       className="animate"
       spacing={8}
       xs={12}
-      justify="center"
+      justifyContent="center"
       alignItems="center"
       alignContent="center"
     >

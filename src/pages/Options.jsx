@@ -31,7 +31,7 @@ function Options() {
       container
       spacing={8}
       xs={12}
-      justify="center"
+      justifyContent="center"
       alignItems="center"
       alignContent="center"
       className="animate"
